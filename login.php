@@ -2,7 +2,6 @@
 include "db.php";
 
 session_start();
-
 #Login script is begin here
 #If user given credential matches successfully with the data available in database then we will echo string login_success
 #login_success string will go back to called Anonymous funtion $("#login").click() 
@@ -21,7 +20,7 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
         
 	//if user record is available in database then $count will be equal to 1
 	if($count == 1){
-		   	
+        echo "<script> location.href='store.php'; </script>";
 			if (isset($_COOKIE["product_list"])) {
 				$p_list = stripcslashes($_COOKIE["product_list"]);
 				//here we are decoding stored json product list cookie to normal array
@@ -44,22 +43,22 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
 				setcookie("product_list","",strtotime("-1 day"),"/");
 				//if user is logging from after cart page we will send cart_login
 				echo "cart_login";
-				
-				
+
+
 				exit();
 				
 			}
 			//if user is login from page we will send login_success
 			echo "login_success";
-			$BackToMyPage = $_SERVER['HTTP_REFERER'];
-				if(!isset($BackToMyPage)) {
-					header('Location: '.$BackToMyPage);
-					echo"<script type='text/javascript'>
-					
-					</script>";
-				} else {
-					echo "<script> location.href='index.php'; </script>" ;// default page
-				} 
+//			$BackToMyPage = $_SERVER['REQUEST_URI'];
+//				if(!isset($BackToMyPage)) {
+//					header('Location: '.$BackToMyPage);
+//					echo"<script type='text/javascript'>
+//
+//					</script>";
+//				} else {
+//					echo "<script> location.href='index.php'; </script>" ;// default page
+//				}
 				
 			
             exit;
